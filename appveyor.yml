@@ -135,7 +135,7 @@ build_script:
     if (($env:DO_TEST -eq "True" -or $DO_WHEEL -eq "True") -and $env:PYVER -ne "35") {
       python -c "with open(r'$PYTHON_ROOT\Lib\distutils\distutils.cfg', 'wb') as fh: fh.write(b'[build]\ncompiler = mingw32\n')"
       Check-Error
-      python -m pip install pip wheel setuptools --upgrade
+      python -m pip install pip==8.0.0 wheel setuptools --upgrade
       Check-Error
       pip install -i https://pypi.anaconda.org/carlkl/simple mingwpy
       Check-Error
@@ -203,7 +203,7 @@ build_script:
       $env:PATH=$PYTHON_ROOT+"\share\glew\bin;"+$PYTHON_ROOT+"\share\sdl2\bin;"+$env:PATH
 
 
-      python -m pip install pip wheel setuptools --upgrade
+      python -m pip install pip==8.0.0 wheel setuptools --upgrade
       Check-Error
       pip install mock cython pygments docutils nose $sdl2_file $sdl2_dev_file $glew_file $glew_dev_file
       Check-Error
