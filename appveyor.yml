@@ -149,6 +149,7 @@ build_script:
       python setup.py build_ext --inplace
       Check-Error
     } else {
+      $env:DO_TEST = "False"
       $py35="C:\py35"
       if ($env:BITTNESS -eq "64") {
         $sdl2_url = "0B-080DPVLKs2cWZXRXhGSXZqYmM"
