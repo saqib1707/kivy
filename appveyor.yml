@@ -172,12 +172,8 @@ build_script:
       Check-Error
       mkdir "$py35"
       Check-Error
-      cmd /c del /F /S /Q "C:\projects\kivy"
-      Check-Error
-      dir
       git clone -q --branch=feature-gl-backend https://github.com/kivy/kivy.git C:\projects\kivy_temp
       Check-Error
-      move C:\projects\kivy_temp C:\projects\kivy
       Check-Error
       (new-object net.webclient).DownloadFile("https://docs.google.com/uc?id="+$sdl2_url, $sdl2_file)
       Check-Error
@@ -211,7 +207,7 @@ build_script:
       Remove-Item "$PYTHON_ROOT\Lib\site-packages\kivy" -Force -Recurse
       Remove-Item "$PYTHON_ROOT\Lib\site-packages\kivy.deps.*nspkg.pth"
 
-      python "C:\projects\kivy\setup.py" build_ext --inplace
+      python "C:\projects\kivy_temp\setup.py" build_ext --inplace
       Check-Error
     }
 
