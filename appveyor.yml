@@ -19,13 +19,13 @@ environment:
   USE_GSTREAMER: 1
   KIVY_USE_SETUPTOOLS: 1
   matrix:
+  - PYVER: 35
+    BITTNESS: 86
+    COMPILER: msvc
   - PYVER: 27
     BITTNESS: 86
   - PYVER: 34
     BITTNESS: 86
-  - PYVER: 35
-    BITTNESS: 86
-    COMPILER: msvc
   - PYVER: 27
     BITTNESS: 64
   - PYVER: 34
@@ -211,7 +211,7 @@ build_script:
       Remove-Item "$PYTHON_ROOT\Lib\site-packages\kivy" -Force -Recurse
       Remove-Item "$PYTHON_ROOT\Lib\site-packages\kivy.deps.*nspkg.pth"
 
-      python setup.py build_ext --inplace
+      python "C:\projects\kivy\setup.py" build_ext --inplace
       Check-Error
     }
 
