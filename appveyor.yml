@@ -207,7 +207,7 @@ build_script:
       pip install mock cython pygments docutils nose $sdl2_file $sdl2_dev_file $glew_file $glew_dev_file
       Check-Error
 
-      Copy-Item "$PYTHON_ROOT\Lib\site-packages\kivy\deps\*" -destination "$env:APPVEYOR_BUILD_FOLDER\kivy\deps" -recurse
+      Copy-Item "$PYTHON_ROOT\Lib\site-packages\kivy\deps\*" -destination "C:\projects\kivy_temp\kivy\deps" -recurse
       Remove-Item "$PYTHON_ROOT\Lib\site-packages\kivy" -Force -Recurse
       Remove-Item "$PYTHON_ROOT\Lib\site-packages\kivy.deps.*nspkg.pth"
 
