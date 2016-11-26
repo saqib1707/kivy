@@ -20,19 +20,19 @@ environment:
   KIVY_USE_SETUPTOOLS: 1
   matrix:
   - PYVER: 35
-    BITTNESS: 86
+    BITTNESS: 64
     COMPILER: msvc
-  - PYVER: 27
-    BITTNESS: 86
-  - PYVER: 34
-    BITTNESS: 86
-  - PYVER: 27
-    BITTNESS: 64
-  - PYVER: 34
-    BITTNESS: 64
   - PYVER: 35
-    BITTNESS: 64
+    BITTNESS: 86
     COMPILER: msvc
+  - PYVER: 27
+    BITTNESS: 86
+  - PYVER: 34
+    BITTNESS: 86
+  - PYVER: 27
+    BITTNESS: 64
+  - PYVER: 34
+    BITTNESS: 64
 install:
 - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-desktop.ps1'))
 build_script:
@@ -135,7 +135,7 @@ build_script:
     if (($env:DO_TEST -eq "True" -or $DO_WHEEL -eq "True") -and $env:PYVER -ne "35") {
       python -c "with open(r'$PYTHON_ROOT\Lib\distutils\distutils.cfg', 'wb') as fh: fh.write(b'[build]\ncompiler = mingw32\n')"
       Check-Error
-      python -m pip install pip==8.0.0 wheel setuptools --upgrade
+      python -m pip install pip wheel setuptools --upgrade
       Check-Error
       pip install -i https://pypi.anaconda.org/carlkl/simple mingwpy
       Check-Error
@@ -160,6 +160,7 @@ build_script:
         $sdl2_dev_file = $py35+"\kivy.deps.sdl2_dev-0.1.13-cp35-cp35m-win_amd64.whl"
         $glew_file = $py35+"\kivy.deps.glew-0.1.5-cp35-cp35m-win_amd64.whl"
         $glew_dev_file = $py35+"\kivy.deps.glew_dev-0.1.5-cp35-cp35m-win_amd64.whl"
+        $vcvars="C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\amd64\vcvars64.bat"
       } else {
         $sdl2_url = "0B-080DPVLKs2TGg0SXcwX1p1OHc"
         $sdl2_dev_url = "0B-080DPVLKs2bjIyVDN3S0c0c0U"
@@ -169,6 +170,7 @@ build_script:
         $sdl2_dev_file = $py35+"\kivy.deps.sdl2_dev-0.1.13-cp35-cp35m-win32.whl"
         $glew_file = $py35+"\kivy.deps.glew-0.1.5-cp35-cp35m-win32.whl"
         $glew_dev_file = $py35+"\kivy.deps.glew_dev-0.1.5-cp35-cp35m-win32.whl"
+        $vcvars="C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat"
       }
       Check-Error
       mkdir "$py35"
@@ -184,7 +186,7 @@ build_script:
       Check-Error
       (new-object net.webclient).DownloadFile("https://docs.google.com/uc?id="+$glew_dev_url, $glew_dev_file)
       Check-Error
-      cmd /c '"C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat"&set' |
+      cmd /c '$vcvars&set' |
       foreach {
         if ($_ -match "=") {
           $v = $_.split("="); set-item -force -path "ENV:\$($v[0])"  -value "$($v[1])"
@@ -204,7 +206,7 @@ build_script:
       $env:PATH=$PYTHON_ROOT+"\share\glew\bin;"+$PYTHON_ROOT+"\share\sdl2\bin;"+$env:PATH
 
 
-      python -m pip install pip==8.0.0 wheel setuptools --upgrade
+      python -m pip install pip wheel setuptools --upgrade
       Check-Error
       pip install mock cython pygments docutils nose $sdl2_file $sdl2_dev_file $glew_file $glew_dev_file
       Check-Error
