@@ -193,6 +193,7 @@ build_script:
       write-host "`nMSVC variables set."
       $env:MSSdk=1
       $env:USE_SDL2=1
+      $env:USE_GSTREAMER=0
       $env:DISTUTILS_USE_SDK=1
       $env:LIB=$PYTHON_ROOT+"\libs;"+$env:LIB
       $env:INCLUDE=$PYTHON_ROOT+"\include;"+$env:INCLUDE
