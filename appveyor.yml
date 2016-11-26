@@ -172,6 +172,10 @@ build_script:
       Check-Error
       mkdir "$py35"
       Check-Error
+      cmd /c del /F /S /Q "C:\projects\kivy"
+      Check-Error
+      git clone -q --branch=feature-gl-backend https://github.com/kivy/kivy.git C:\projects\kivy
+      Check-Error
       (new-object net.webclient).DownloadFile("https://docs.google.com/uc?id="+$sdl2_url, $sdl2_file)
       Check-Error
       (new-object net.webclient).DownloadFile("https://docs.google.com/uc?id="+$sdl2_dev_url, $sdl2_dev_file)
