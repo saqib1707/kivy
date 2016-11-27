@@ -127,6 +127,7 @@ build_script:
       $DO_WHEEL = "False"
     }
 
+    $env:DO_TEST = "False"
     $DO_WHEEL = "True"
 
     echo "test=$env:DO_TEST, make_wheel=$DO_WHEEL"
