@@ -115,8 +115,6 @@ build_script:
     }
 
 
-    $DO_WHEEL = "True"
-
     if ($env:APPVEYOR_REPO_TAG -eq "true"){
       $WHEEL_NAME = "-cp"
     } elseif ($env:APPVEYOR_SCHEDULED_BUILD -eq "True" -or $env:APPVEYOR_FORCED_BUILD -eq "True" -or $env:APPVEYOR_RE_BUILD -eq "True"){
@@ -129,6 +127,7 @@ build_script:
       $DO_WHEEL = "False"
     }
 
+    $DO_WHEEL = "True"
     echo "test=$env:DO_TEST, make_wheel=$DO_WHEEL"
 
 
