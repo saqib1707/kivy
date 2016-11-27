@@ -157,19 +157,27 @@ build_script:
         $sdl2_dev_url = "0B-080DPVLKs2QVZ6QUlTQjlwamM"
         $glew_url = "0B-080DPVLKs2UkdqTUZWZmdvRXc"
         $glew_dev_url = "0B-080DPVLKs2Q09zVnVjYngtX0E"
+        $gst_url = "0B-080DPVLKs2ZjFJcUZaLVlsNkE"
+        $gst_dev_url = "0B-080DPVLKs2M3VMSWJYcVJWdTg"
         $sdl2_file = $py35+"\kivy.deps.sdl2-0.1.13-cp35-cp35m-win_amd64.whl"
         $sdl2_dev_file = $py35+"\kivy.deps.sdl2_dev-0.1.13-cp35-cp35m-win_amd64.whl"
         $glew_file = $py35+"\kivy.deps.glew-0.1.5-cp35-cp35m-win_amd64.whl"
         $glew_dev_file = $py35+"\kivy.deps.glew_dev-0.1.5-cp35-cp35m-win_amd64.whl"
+        $gst_file = $py35+"\kivy.deps.gstreamer-0.1.7-cp35-cp35m-win_amd64.whl"
+        $gst_dev_file = $py35+"\kivy.deps.gstreamer_dev-0.1.7-cp35-cp35m-win_amd64.whl"
       } else {
         $sdl2_url = "0B-080DPVLKs2TGg0SXcwX1p1OHc"
         $sdl2_dev_url = "0B-080DPVLKs2bjIyVDN3S0c0c0U"
         $glew_url = "0B-080DPVLKs2dkdoS2t1cU9PZmc"
         $glew_dev_url = "0B-080DPVLKs2QUZZNDNvem9meU0"
+        $gst_url = "0B-080DPVLKs2VmlEU0w2RExfaE0"
+        $gst_dev_url = "0B-080DPVLKs2UEczUFZDOFF3cGM"
         $sdl2_file = $py35+"\kivy.deps.sdl2-0.1.13-cp35-cp35m-win32.whl"
         $sdl2_dev_file = $py35+"\kivy.deps.sdl2_dev-0.1.13-cp35-cp35m-win32.whl"
         $glew_file = $py35+"\kivy.deps.glew-0.1.5-cp35-cp35m-win32.whl"
         $glew_dev_file = $py35+"\kivy.deps.glew_dev-0.1.5-cp35-cp35m-win32.whl"
+        $gst_file = $py35+"\kivy.deps.gstreamer-0.1.7-cp35-cp35m-win32.whl"
+        $gst_dev_file = $py35+"\kivy.deps.gstreamer_dev-0.1.7-cp35-cp35m-win32.whl"
       }
       Check-Error
       mkdir "$py35"
@@ -184,6 +192,10 @@ build_script:
       Check-Error
       (new-object net.webclient).DownloadFile("https://docs.google.com/uc?id="+$glew_dev_url, $glew_dev_file)
       Check-Error
+      (new-object net.webclient).DownloadFile("https://docs.google.com/uc?id="+$gst_url, $gst_file)
+      Check-Error
+      (new-object net.webclient).DownloadFile("https://docs.google.com/uc?id="+$gst_dev_url, $gst_dev_file)
+      Check-Error
       cmd /c '("C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" x%BITTNESS%)&set' |
       foreach {
         if ($_ -match "=") {
@@ -194,7 +206,6 @@ build_script:
       write-host "`nMSVC variables set."
       $env:MSSdk=1
       $env:USE_SDL2=1
-      $env:USE_GSTREAMER=0
       $env:DISTUTILS_USE_SDK=1
       $env:LIB=$PYTHON_ROOT+"\libs;"+$env:LIB
       $env:INCLUDE=$PYTHON_ROOT+"\include;"+$env:INCLUDE
