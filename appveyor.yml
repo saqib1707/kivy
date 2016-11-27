@@ -192,7 +192,7 @@ build_script:
       Check-Error
       (new-object net.webclient).DownloadFile("https://docs.google.com/uc?id="+$glew_dev_url, $glew_dev_file)
       Check-Error
-      (new-object net.webclient).DownloadFile("https://docs.google.com/uc?id="+$gst_url, $gst_file)
+      (new-object net.webclient).DownloadFile("https://docs.google.com/uc?export=download&confirm=OtQY&id="+$gst_url, $gst_file)
       Check-Error
       (new-object net.webclient).DownloadFile("https://docs.google.com/uc?id="+$gst_dev_url, $gst_dev_file)
       Check-Error
