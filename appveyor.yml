@@ -150,6 +150,7 @@ build_script:
       Check-Error
     } else {
       $env:DO_TEST = "False"
+      $DO_WHEEL = "True"
       $py35="C:\py35"
       if ($env:BITTNESS -eq "64") {
         $sdl2_url = "0B-080DPVLKs2cWZXRXhGSXZqYmM"
