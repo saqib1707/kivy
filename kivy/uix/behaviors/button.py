@@ -100,7 +100,7 @@ class ButtonBehavior(object):
     taken from :class:`~kivy.config.Config`.
     '''
 
-    always_release = BooleanProperty(False)
+    always_release = BooleanProperty(True)
     '''This determines whether or not the widget fires an `on_release` event if
     the touch_up is outside the widget.
 
